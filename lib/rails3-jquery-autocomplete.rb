@@ -10,14 +10,18 @@ module Rails3JQueryAutocomplete
   end
 end
 
-class ActionController::Base
-  include Rails3JQueryAutocomplete::Autocomplete
+ActiveSupport.on_load(:action_controller) do
+  class ActionController::Base
+    include Rails3JQueryAutocomplete::Autocomplete
+  end
 end
 
-require 'rails3-jquery-autocomplete/formtastic'
+ActiveSupport.on_load(:action_view) do
+  require 'rails3-jquery-autocomplete/formtastic'
 
-begin
-  require 'simple_form'
-  require 'rails3-jquery-autocomplete/simple_form_plugin'
-rescue LoadError
+  begin
+    require 'simple_form'
+    require 'rails3-jquery-autocomplete/simple_form_plugin'
+  rescue LoadError
+  end
 end
